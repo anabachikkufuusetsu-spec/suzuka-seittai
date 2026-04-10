@@ -25,7 +25,171 @@
       --accent:    #e8e8e8;
       --accent-on: #0a0a0a;
     }
---border);
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--fg);
+      font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(10,10,10,0.82);
+      backdrop-filter: saturate(160%) blur(24px);
+      -webkit-backdrop-filter: saturate(160%) blur(24px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 52px;
+    }
+
+    .logo {
+      font-size: 15px; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--white); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--white); }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--fg-2); text-decoration: none; letter-spacing: 0.03em; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    @media (max-width: 600px) { .nav-links { display: none; } nav { padding: 0 20px; } }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 96vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 80px 24px 60px;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+
+    /* 施術写真スライドショー背景 */
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      display: flex;
+    }
+
+    .hero-bg-slide {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      position: absolute; inset: 0;
+    }
+
+    .hero-bg-slide.active { opacity: 1; }
+
+    /* 写真の上に暗いオーバーレイ */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.72) 0%,
+        rgba(10,10,10,0.55) 50%,
+        rgba(10,10,10,0.85) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; z-index: 2; }
+
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== 施術ギャラリー セクション ===== */
+    .gallery-section {
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .gallery-item {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface-2);
+    }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+      filter: brightness(0.85);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 14px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+      font-size: 12px; color: rgba(255,255,255,0.8); letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 600px) {
+      .gallery-section { grid-template-columns: 1fr; }
+      .gallery-item { aspect-ratio: 16/9; }
+    }
+
+    .hero-label {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 32px;
+      border: 1px solid var(--border); padding: 6px 16px; border-radius: 999px;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 76px);
+      font-weight: 700; letter-spacing: -2px; line-height: 1.08;
+      color: var(--white); margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--fg-2); font-weight: 300; }
+
+    .hero-sub {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: var(--fg-2); max-width: 480px;
+      line-height: 1.8; margin-bottom: 48px;
+    }
+
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block; padding: 14px 28px; border-radius: 999px;
+      font-size: 14px; font-weight: 600; text-decoration: none; letter-spacing: 0.02em;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn:hover { opacity: 0.88; transform: scale(1.02); }
+
+    .btn-fill { background: var(--white); color: var(--ink); }
+    .btn-outline { border: 1px solid var(--border); color: var(--fg-2); }
+    .btn-outline:hover { border-color: var(--muted); color: var(--white); }
+
+    /* ===== BADGE ROW ===== */
+    .badges {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
       background: var(--surface);
     }
 
@@ -223,7 +387,13 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero-section">
+  <!-- 施術写真スライドショー背景 -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-bg-slide active" style="background-image:url('img/therapy1.jpg')"></div>
+    <div class="hero-bg-slide" style="background-image:url('img/therapy2.jpg')"></div>
+    <div class="hero-bg-slide" style="background-image:url('img/therapy3.jpg')"></div>
+  </div>
   <p class="hero-label">鈴鹿市 限定 · LINE オープンチャット</p>
   <h1>あなたの疲れ、<br><span>私が整えます。</span></h1>
   <p class="hero-sub">
@@ -235,6 +405,22 @@
     <a class="btn btn-outline" href="#karte">カルテを入力する</a>
   </div>
 </section>
+
+<!-- GALLERY: 施術写真 -->
+<div class="gallery-section" id="gallery">
+  <div class="gallery-item">
+    <img src="img/therapy1.jpg" alt="肩・首への施術" loading="lazy">
+    <p class="gallery-caption">肩甲骨まわりをほぐす</p>
+  </div>
+  <div class="gallery-item">
+    <img src="img/therapy2.jpg" alt="腰まわりへの施術" loading="lazy">
+    <p class="gallery-caption">腰・骨盤まわりを整える</p>
+  </div>
+  <div class="gallery-item">
+    <img src="img/therapy3.jpg" alt="背中全体への施術" loading="lazy">
+    <p class="gallery-caption">背中全体をていねいに</p>
+  </div>
+</div>
 
 <!-- BADGE ROW -->
 <div class="badges">
@@ -249,7 +435,7 @@
 <section class="section">
   <div class="section-inner">
     <span class="section-tag" data-fade>Pain Points</span>
-    <h2 class="section-h" data-fade>毎日、工場で<br>身を削っている人へ。</h2>
+    <h2 class="section-h" data-fade>每日、工場で<br>身を削っている人へ。</h2>
     <p class="section-p" data-fade>
       ホンダ・住友電装で働くあなたの「疲れ」は、休日に黙って我慢するものじゃない。
     </p>
@@ -257,7 +443,7 @@
       <div class="pain-cell">
         <p class="pain-num">01</p>
         <h3>夜勤明け、<br>肩と腰が限界</h3>
-        <p>ラインに立ちっぱなし8時間。帰宅しても身体が休まらない。そのまま布団に倒れ込む前に、誰かに整えてほしい。</p>
+        <p>ラインに立ちっぱなと8時間。帰宅しても身体が休まらない。そのまま布団に倒れ込む前に、誰かに整えてほしい。</p>
       </div>
       <div class="pain-cell">
         <p class="pain-num">02</p>
@@ -294,19 +480,19 @@
         <div class="service-icon">💆‍♂️</div>
         <h3>出張整体</h3>
         <p>肩・腰・足など工場疲れに特化したボディケア。ご自宅・ご指定の場所へ出張。カルテで履歴管理。</p>
-        <p class="service-price">¥3,000〜<small> / 30分〜</small></p>
+        <p class="service-price">￥3,000～<small> / 30分～</small></p>
       </div>
       <div class="service-cell">
         <div class="service-icon">🔧</div>
         <h3>便利屋・雑用代行</h3>
         <p>電球・家具組立・荷物移動・草むしりなど。「男手があれば…」をまるごと引き受けます。</p>
-        <p class="service-price">¥2,000〜<small> / 1時間〜</small></p>
+        <p class="service-price">￥2,000～<small> / 1時間～</small></p>
       </div>
       <div class="service-cell">
         <div class="service-icon">🚗</div>
         <h3>送迎・買い出し代行</h3>
-        <p>通院送迎・重い荷物の買い出しなど。鈴鹿市内対応。免許返納後のご家族もぜひ。</p>
-        <p class="service-price">¥1,500〜<small> / 片道〜</small></p>
+        <p>通院送迎・重い荷物の買い出しなど。鈴鹿市内対応。免許返納後のご家族もどうぞ。</p>
+        <p class="service-price">￥1,500～<small> / 片道～</small></p>
       </div>
       <div class="service-cell">
         <div class="service-icon">📦</div>
@@ -389,7 +575,7 @@
 
     <!-- 予約フォーム -->
     <div class="tab-panel" id="reserve-tab">
-      <form class="form-grid" onsubmit="handleSubmit(event,'reserve-success')" id="reserve">
+      <form class="form-grid" onsubmit="handleSubmit(event,'reserve-success')">
         <div class="form-row">
           <div class="field">
             <label>お名前 *</label>
@@ -404,8 +590,8 @@
           <label>ご希望サービス *</label>
           <select required>
             <option value="" disabled selected>選択してください</option>
-            <option>出張整体（30分〜）</option>
-            <option>便利屋・雑用代行（1時間〜）</option>
+            <option>出張整体（30分～）</option>
+            <option>便利屋・雑用代行（1時間～）</option>
             <option>送迎・買い出し代行</option>
             <option>その他・相談</option>
           </select>
@@ -419,9 +605,9 @@
             <label>ご希望時間帯 *</label>
             <select required>
               <option value="" disabled selected>選択</option>
-              <option>午前（9:00〜12:00）</option>
-              <option>午後（13:00〜17:00）</option>
-              <option>夕方（17:00〜20:00）</option>
+              <option>午前（9:00～12:00）</option>
+              <option>午後（13:00～17:00）</option>
+              <option>夕方（17:00～20:00）</option>
               <option>夜勤明け（相談）</option>
             </select>
           </div>
@@ -432,7 +618,7 @@
         </div>
         <div class="field">
           <label>ご要望・メモ</label>
-          <textarea placeholder="例）肩中心で30分。駐車場あります。"></textarea>
+          <textarea placeholder="例）肩中心で・30分。駐車場あります。"></textarea>
         </div>
         <p class="form-note">※ 送信後、LINEにてご確認・日程調整のご連絡をいたします。当日予約は直接LINEへ。</p>
         <button type="submit" class="form-submit">予約リクエストを送る</button>
@@ -495,6 +681,7 @@
 </footer>
 
 <script>
+  /* ===== TAB SWITCH ===== */
   function switchTab(id, btn) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -502,13 +689,57 @@
     btn.classList.add('active');
   }
 
+  /* ===== URLハッシュで予約タブを自動開く ===== */
+  // #reserve → 予約タブ、#cancel → キャンセルタブ、#karte → カルテタブ
+  function handleHashNav() {
+    const hash = window.location.hash;
+    const tabMap = {
+      '#reserve': { panel: 'reserve-tab', btnIndex: 1 },
+      '#cancel':  { panel: 'cancel-tab',  btnIndex: 2 },
+      '#karte':   { panel: 'karte-tab',   btnIndex: 0 },
+    };
+    const target = tabMap[hash];
+    if (target) {
+      // タブ切り替え
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(target.panel).classList.add('active');
+      document.querySelectorAll('.tab-btn')[target.btnIndex].classList.add('active');
+      // フォームセクションへスムーズスクロール
+      setTimeout(() => {
+        document.getElementById('karte').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
+  window.addEventListener('DOMContentLoaded', handleHashNav);
+  window.addEventListener('hashchange', handleHashNav);
+
+  /* ===== ヒーロー背景スライドショー ===== */
+  (function() {
+    const slides = document.querySelectorAll('.hero-bg-slide');
+    if (!slides.length) return;
+    let cur = 0;
+    setInterval(() => {
+      slides[cur].classList.remove('active');
+      cur = (cur + 1) % slides.length;
+      slides[cur].classList.add('active');
+    }, 4000);
+  })();
+
+  /* ===== LIFF 設定 ===== */
   const LIFF_ID = '2009763984-52UiMrkx';
 
+  // LIFFを初期化
   async function initLiff() {
-    try { await liff.init({ liffId: LIFF_ID }); } catch (err) { console.warn('LIFF init failed:', err); }
+    try {
+      await liff.init({ liffId: LIFF_ID });
+    } catch (err) {
+      console.warn('LIFF init failed:', err);
+    }
   }
   initLiff();
 
+  /* ===== フォームデータを整形してLINEメッセージ送信 ===== */
   function buildMessage(formEl, type) {
     const vals = {};
     formEl.querySelectorAll('input, select, textarea').forEach(el => {
@@ -516,10 +747,15 @@
       vals[label] = el.value || '（未入力）';
     });
     const lines = Object.entries(vals).map(([k,v]) => `▸ ${k}：${v}`).join('\n');
-    const headers = { 'karte': '📋 カルテ登録', 'reserve': '📅 予約リクエスト', 'cancel': '❌ キャンセル申請' };
-    return `【${headers[type] || type}】\n${lines}\n\n※ 鈴鹿 出張整体のフォームから送信されました。`;
+    const headers = {
+      'karte':   '📋 カルテ登録',
+      'reserve': '📅 予約リクエスト',
+      'cancel':  '❌ キャンセル申請',
+    };
+    return `【${headers[type] || type}】\n${lines}\n\n※ このメッセージは鈴鹿 出張整体のフォームから送信されました。`;
   }
 
+  /* ===== FORM SUBMIT（LIFF連携） ===== */
   async function handleSubmit(e, successId) {
     e.preventDefault();
     const form = e.target;
@@ -527,21 +763,36 @@
     const typeMap = { 'karte-success': 'karte', 'reserve-success': 'reserve', 'cancel-success': 'cancel' };
     const type = typeMap[successId] || 'other';
     const message = buildMessage(form, type);
+
+    // LINEログイン済みかつLIFF内なら sendMessages を使用
     if (liff.isInClient && liff.isInClient()) {
       try {
         await liff.sendMessages([{ type: 'text', text: message }]);
-        form.style.display = 'none'; success.style.display = 'block';
-      } catch (err) { openLineUrl(message); form.style.display = 'none'; success.style.display = 'block'; }
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } catch (err) {
+        // sendMessages失敗 → LINEアプリへフォールバック
+        openLineUrl(message);
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
     } else {
-      openLineUrl(message); form.style.display = 'none'; success.style.display = 'block';
+      // ブラウザ / LIFFアプリ外 → LINE URLスキームで開く
+      openLineUrl(message);
+      form.style.display = 'none';
+      success.style.display = 'block';
     }
   }
 
   function openLineUrl(message) {
+    // LINE の「テキストを共有」スキームでオープンチャットへ誘導
     const encoded = encodeURIComponent(message);
-    window.open(`https://liff.line.me/${LIFF_ID}?msg=${encoded}`, '_blank');
+    // LIFFリンクでオープンチャットを開きつつメッセージをパラメータで渡す
+    const liffUrl = `https://liff.line.me/${LIFF_ID}?msg=${encoded}`;
+    window.open(liffUrl, '_blank');
   }
 
+  /* ===== SCROLL FADE ===== */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
   }, { threshold: 0.12 });
