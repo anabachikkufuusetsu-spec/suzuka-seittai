@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【鈴鹿市 限定】出張整体💆</title>
+  <!-- LINE LIFF SDK -->
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== DESIGN TOKEN — モノトーン ===== */
+    :root {
+      --ink:       #0a0a0a;
+      --ink-2:     #1c1c1e;
+      --ink-3:     #3a3a3c;
+      --muted:     #636366;
+      --border:    #2c2c2e;
+      --surface:   #141414;
+      --surface-2: #1e1e1e;
+      --fg:        #f5f5f5;
+      --fg-2:      #aeaeb2;
+      --white:     #ffffff;
+      --accent:    #e8e8e8;
+      --accent-on: #0a0a0a;
+    }
+--border);
+      background: var(--surface);
+    }
+
+    .badge { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--fg-2); }
+    .badge-icon { font-size: 16px; }
+
+    /* ===== SECTION ===== */
+    .section { padding: 88px 24px; border-bottom: 1px solid var(--border); }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px; display: block;
+    }
+
+    .section-h {
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 700; letter-spacing: -1px; line-height: 1.15;
+      color: var(--white); margin-bottom: 16px;
+    }
+
+    .section-p {
+      font-size: 16px; color: var(--fg-2); line-height: 1.8;
+      max-width: 540px; margin-bottom: 48px;
+    }
+
+    /* ===== PAIN ===== */
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; }
+
+    .pain-cell {
+      background: var(--surface-2); padding: 40px 28px;
+    }
+
+    .pain-cell:first-child { border-radius: 12px 0 0 12px; }
+    .pain-cell:last-child { border-radius: 0 12px 12px 0; }
+    @media (max-width: 700px) {
+      .pain-cell:first-child { border-radius: 12px 12px 0 0; }
+      .pain-cell:last-child { border-radius: 0 0 12px 12px; }
+    }
+
+    .pain-num { font-size: 11px; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 16px; }
+
+    .pain-cell h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
+    .pain-cell p { font-size: 13px; color: var(--fg-2); line-height: 1.8; }
+
+    /* ===== CATCH ===== */
+    .catch-section {
+      padding: 100px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .catch-section blockquote {
+      font-size: clamp(22px, 4.5vw, 40px);
+      font-weight: 700; letter-spacing: -0.5px; line-height: 1.6;
+      color: var(--white); max-width: 720px; margin: 0 auto 20px;
+    }
+
+    .catch-section blockquote em { font-style: normal; color: var(--fg-2); }
+
+    .catch-attr { font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
+
+    /* ===== SERVICES ===== */
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; }
+
+    .service-cell {
+      background: var(--surface-2); padding: 36px 24px;
+      transition: background .2s;
+    }
+    .service-cell:hover { background: #252525; }
+    .service-cell:first-child { border-radius: 12px 0 0 12px; }
+    .service-cell:last-child { border-radius: 0 12px 12px 0; }
+    @media (max-width: 700px) {
+      .service-cell:first-child { border-radius: 12px 12px 0 0; }
+      .service-cell:last-child { border-radius: 0 0 12px 12px; }
+    }
+
+    .service-icon { font-size: 28px; margin-bottom: 16px; }
+    .service-cell h3 { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .service-cell p { font-size: 13px; color: var(--fg-2); line-height: 1.75; }
+    .service-price { margin-top: 16px; font-size: 20px; font-weight: 700; color: var(--white); }
+    .service-price small { font-size: 12px; font-weight: 400; color: var(--muted); }
+
+    /* ===== KARTE / FORM ===== */
+    .form-section { padding: 88px 24px; border-bottom: 1px solid var(--border); background: var(--surface); }
+    .form-section .section-inner { max-width: 680px; }
+
+    .form-grid { display: grid; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: var(--ink-2); border: 1px solid var(--border);
+      color: var(--white); border-radius: 10px;
+      padding: 12px 14px; font-size: 15px;
+      font-family: inherit; outline: none;
+      transition: border-color .2s;
+      -webkit-appearance: none;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--muted); }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus { border-color: var(--fg-2); }
+
+    .field select { cursor: pointer; }
+    .field textarea { resize: vertical; min-height: 100px; }
+
+    .form-note { font-size: 12px; color: var(--muted); line-height: 1.7; margin-top: 8px; }
+
+    .form-submit {
+      margin-top: 8px; width: 100%;
+      background: var(--white); color: var(--ink);
+      border: none; border-radius: 999px;
+      padding: 16px; font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: opacity .2s, transform .15s;
+      font-family: inherit;
+    }
+    .form-submit:hover { opacity: 0.85; transform: scale(1.01); }
+
+    .form-tabs {
+      display: flex; gap: 2px; margin-bottom: 36px;
+      background: var(--ink-2); border-radius: 10px; padding: 4px;
+    }
+
+    .tab-btn {
+      flex: 1; padding: 10px 16px; border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      font-family: inherit; transition: all .2s;
+      background: transparent; color: var(--muted);
+    }
+
+    .tab-btn.active { background: var(--surface-2); color: var(--white); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ===== SUCCESS MSG ===== */
+    .success-msg {
+      display: none; text-align: center; padding: 40px 20px;
+      border: 1px solid var(--border); border-radius: 16px;
+    }
+    .success-msg .s-icon { font-size: 40px; margin-bottom: 16px; }
+    .success-msg h3 { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .success-msg p { font-size: 14px; color: var(--fg-2); line-height: 1.7; }
+
+    /* ===== CTA BOTTOM ===== */
+    .cta-bottom {
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    .cta-bottom h2 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700; letter-spacing: -1px;
+      color: var(--white); margin-bottom: 12px;
+    }
+
+    .cta-bottom p { font-size: 16px; color: var(--fg-2); margin-bottom: 40px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 32px 24px; text-align: center;
+      font-size: 12px; color: var(--muted); line-height: 1.9;
+    }
+
+    /* ===== DIVIDER LINE ===== */
+    .line { width: 32px; height: 1px; background: var(--border); margin: 0 auto 40px; }
+
+    /* ===== SCROLL ANIMATION ===== */
+    [data-fade] { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    [data-fade].visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#"><span class="logo-dot"></span>鈴鹿 限定　出張整体</a>
+  <ul class="nav-links">
+    <li><a href="#services">サービス</a></li>
+    <li><a href="#karte">カルテ</a></li>
+    <li><a href="#reserve">予約</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">鈴鹿市 限定 · LINE オープンチャット</p>
+  <h1>あなたの疲れ、<br><span>私が整えます。</span></h1>
+  <p class="hero-sub">
+    出張整体から雑用まで。<br>
+    鈴鹿で働く40・50代の「困った」に、丁寧に対応いたします。
+  </p>
+  <div class="hero-cta">
+    <a class="btn btn-fill" href="#reserve">予約する</a>
+    <a class="btn btn-outline" href="#karte">カルテを入力する</a>
+  </div>
+</section>
+
+<!-- BADGE ROW -->
+<div class="badges">
+  <div class="badge"><span class="badge-icon">📍</span>鈴鹿市内 出張専門</div>
+  <div class="badge"><span class="badge-icon">⚡</span>当日予約OK</div>
+  <div class="badge"><span class="badge-icon">💬</span>LINEで完結</div>
+  <div class="badge"><span class="badge-icon">📋</span>カルテで毎回安心</div>
+  <div class="badge"><span class="badge-icon">👤</span>完全マンツーマン</div>
+</div>
+
+<!-- PAIN -->
+<section class="section">
+  <div class="section-inner">
+    <span class="section-tag" data-fade>Pain Points</span>
+    <h2 class="section-h" data-fade>毎日、工場で<br>身を削っている人へ。</h2>
+    <p class="section-p" data-fade>
+      ホンダ・住友電装で働くあなたの「疲れ」は、休日に黙って我慢するものじゃない。
+    </p>
+    <div class="pain-grid" data-fade>
+      <div class="pain-cell">
+        <p class="pain-num">01</p>
+        <h3>夜勤明け、<br>肩と腰が限界</h3>
+        <p>ラインに立ちっぱなし8時間。帰宅しても身体が休まらない。そのまま布団に倒れ込む前に、誰かに整えてほしい。</p>
+      </div>
+      <div class="pain-cell">
+        <p class="pain-num">02</p>
+        <h3>家の雑用が<br>後回しのまま</h3>
+        <p>電球・草むしり・重い荷物の移動。休日くらいゆっくりしたいのに、やることが消えない。</p>
+      </div>
+      <div class="pain-cell">
+        <p class="pain-num">03</p>
+        <h3>気軽に頼める<br>場所がなかった</h3>
+        <p>鈴鹿で整体や便利屋を探しても、遠い・予約しづらい・高い。だからここがある。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATCHCOPY -->
+<section class="catch-section">
+  <blockquote data-fade>
+    「工場帰りの<em>あの疲れ、</em><br>
+    今日こそ、ちゃんと取りに来てください。」
+  </blockquote>
+  <div class="line"></div>
+  <p class="catch-attr">— 鈴鹿・出張整体専門 / 丁寧に寄り添う約束</p>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-inner">
+    <span class="section-tag" data-fade>Services</span>
+    <h2 class="section-h" data-fade>使いたいときに、使えるサービス。</h2>
+    <p class="section-p" data-fade>LINEで連絡ひとつ。手続きなし、余計な説明なし。</p>
+    <div class="service-grid" data-fade>
+      <div class="service-cell">
+        <div class="service-icon">💆‍♂️</div>
+        <h3>出張整体</h3>
+        <p>肩・腰・足など工場疲れに特化したボディケア。ご自宅・ご指定の場所へ出張。カルテで履歴管理。</p>
+        <p class="service-price">¥3,000〜<small> / 30分〜</small></p>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon">🔧</div>
+        <h3>便利屋・雑用代行</h3>
+        <p>電球・家具組立・荷物移動・草むしりなど。「男手があれば…」をまるごと引き受けます。</p>
+        <p class="service-price">¥2,000〜<small> / 1時間〜</small></p>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon">🚗</div>
+        <h3>送迎・買い出し代行</h3>
+        <p>通院送迎・重い荷物の買い出しなど。鈴鹿市内対応。免許返納後のご家族もぜひ。</p>
+        <p class="service-price">¥1,500〜<small> / 片道〜</small></p>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon">📦</div>
+        <h3>なんでも相談</h3>
+        <p>「こんなこと頼めるかな…」も大丈夫。まずはLINEで気軽にどうぞ。断らずに向き合います。</p>
+        <p class="service-price" style="color:var(--muted); font-size:15px;">無料相談受付中</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KARTE & RESERVE FORM -->
+<section class="form-section" id="karte">
+  <div class="section-inner">
+    <span class="section-tag" data-fade>カルテ ＆ 予約</span>
+    <h2 class="section-h" data-fade>LINEで完結する前に、<br>ここで記録を。</h2>
+    <p class="section-p" data-fade>カルテを登録しておくと、次回から「また説明しなくていい」が実現します。</p>
+
+    <!-- TABS -->
+    <div class="form-tabs" data-fade>
+      <button class="tab-btn active" onclick="switchTab('karte-tab', this)">📋 カルテ登録</button>
+      <button class="tab-btn" onclick="switchTab('reserve-tab', this)">📅 予約する</button>
+      <button class="tab-btn" onclick="switchTab('cancel-tab', this)">❌ キャンセル</button>
+    </div>
+
+    <!-- カルテ登録 -->
+    <div class="tab-panel active" id="karte-tab">
+      <form class="form-grid" onsubmit="handleSubmit(event,'karte-success')">
+        <div class="form-row">
+          <div class="field">
+            <label>お名前 *</label>
+            <input type="text" placeholder="例）山田 太郎" required>
+          </div>
+          <div class="field">
+            <label>ふりがな</label>
+            <input type="text" placeholder="やまだ たろう">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>年齢</label>
+            <input type="number" placeholder="例）45" min="18" max="80">
+          </div>
+          <div class="field">
+            <label>LINE名 *</label>
+            <input type="text" placeholder="LINEに登録している名前" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>お仕事（任意）</label>
+          <select>
+            <option value="" disabled selected>選択してください</option>
+            <option>ホンダ製造</option>
+            <option>住友電装</option>
+            <option>その他製造業</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>気になる部位・症状 *</label>
+          <textarea placeholder="例）肩こりがひどい。腰が痛い。足がむくむ。夜勤明けに使いたい。" required></textarea>
+        </div>
+        <div class="field">
+          <label>アレルギー・持病（任意）</label>
+          <input type="text" placeholder="例）腰椎ヘルニア、高血圧など">
+        </div>
+        <div class="field">
+          <label>ご希望・一言</label>
+          <textarea placeholder="例）強めに押してほしい。足中心でお願いしたい。"></textarea>
+        </div>
+        <p class="form-note">※ 入力内容はカルテとして管理します。次回以降の施術に活用させていただきます。</p>
+        <button type="submit" class="form-submit">カルテを送信する</button>
+      </form>
+      <div class="success-msg" id="karte-success">
+        <div class="s-icon">✅</div>
+        <h3>カルテを受け付けました</h3>
+        <p>ありがとうございます。<br>次回から「また説明しなくていい」が実現します。<br>LINEでメッセージをお待ちしています。</p>
+      </div>
+    </div>
+
+    <!-- 予約フォーム -->
+    <div class="tab-panel" id="reserve-tab">
+      <form class="form-grid" onsubmit="handleSubmit(event,'reserve-success')" id="reserve">
+        <div class="form-row">
+          <div class="field">
+            <label>お名前 *</label>
+            <input type="text" placeholder="例）山田 太郎" required>
+          </div>
+          <div class="field">
+            <label>LINE名 *</label>
+            <input type="text" placeholder="LINEに登録している名前" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>ご希望サービス *</label>
+          <select required>
+            <option value="" disabled selected>選択してください</option>
+            <option>出張整体（30分〜）</option>
+            <option>便利屋・雑用代行（1時間〜）</option>
+            <option>送迎・買い出し代行</option>
+            <option>その他・相談</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>ご希望日 *</label>
+            <input type="date" required>
+          </div>
+          <div class="field">
+            <label>ご希望時間帯 *</label>
+            <select required>
+              <option value="" disabled selected>選択</option>
+              <option>午前（9:00〜12:00）</option>
+              <option>午後（13:00〜17:00）</option>
+              <option>夕方（17:00〜20:00）</option>
+              <option>夜勤明け（相談）</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>場所・エリア *</label>
+          <input type="text" placeholder="例）鈴鹿市○○町 / 自宅マンション" required>
+        </div>
+        <div class="field">
+          <label>ご要望・メモ</label>
+          <textarea placeholder="例）肩中心で30分。駐車場あります。"></textarea>
+        </div>
+        <p class="form-note">※ 送信後、LINEにてご確認・日程調整のご連絡をいたします。当日予約は直接LINEへ。</p>
+        <button type="submit" class="form-submit">予約リクエストを送る</button>
+      </form>
+      <div class="success-msg" id="reserve-success">
+        <div class="s-icon">📅</div>
+        <h3>予約リクエストを受け付けました</h3>
+        <p>LINEにて確認のご連絡をいたします。<br>しばらくお待ちください。</p>
+      </div>
+    </div>
+
+    <!-- キャンセル -->
+    <div class="tab-panel" id="cancel-tab">
+      <form class="form-grid" onsubmit="handleSubmit(event,'cancel-success')">
+        <div class="form-row">
+          <div class="field">
+            <label>お名前 *</label>
+            <input type="text" placeholder="例）山田 太郎" required>
+          </div>
+          <div class="field">
+            <label>LINE名 *</label>
+            <input type="text" placeholder="LINEに登録している名前" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>キャンセルする予約日 *</label>
+          <input type="date" required>
+        </div>
+        <div class="field">
+          <label>キャンセル理由（任意）</label>
+          <textarea placeholder="例）急な夜勤になりました。体調不良のため。"></textarea>
+        </div>
+        <p class="form-note">⚠️ 当日キャンセルはご遠慮ください。前日までにお手続きをお願いいたします。</p>
+        <button type="submit" class="form-submit" style="background:var(--ink-2); color:var(--fg-2); border:1px solid var(--border);">キャンセルを送信する</button>
+      </form>
+      <div class="success-msg" id="cancel-success">
+        <div class="s-icon">❌</div>
+        <h3>キャンセルを受け付けました</h3>
+        <p>またのご利用をお待ちしています。<br>LINEにてご確認のご連絡をいたします。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section class="cta-bottom">
+  <h2 data-fade>今すぐ、動いてください。</h2>
+  <p data-fade>我慢しなくていい。鈴鹿で丁寧に寄り添う、頼れる一手。</p>
+  <div class="hero-cta" data-fade>
+    <a class="btn btn-fill" href="#karte">カルテ・予約はこちら</a>
+    <a class="btn btn-outline" href="https://liff.line.me/2000660080-3JenPg2e?liff_id=2000660080-3JenPg2e&is=lG88GKJ9p6&tcode=A5JxiCaSKlkdFhvKlYXm9AU5lXMuA8XmUaOxkfOfvdlEdNKXvUFeDY9ZNCmyqpha" target="_blank" rel="noopener">LINE予約・キャンセル</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>【鈴鹿市 限定】出張整体💆 — LINE オープンチャット</p>
+  <p style="margin-top:6px; font-size:11px;">© 2026 鈴鹿 出張整体. All rights reserved.</p>
+</footer>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  const LIFF_ID = '2009763984-52UiMrkx';
+
+  async function initLiff() {
+    try { await liff.init({ liffId: LIFF_ID }); } catch (err) { console.warn('LIFF init failed:', err); }
+  }
+  initLiff();
+
+  function buildMessage(formEl, type) {
+    const vals = {};
+    formEl.querySelectorAll('input, select, textarea').forEach(el => {
+      const label = el.closest('.field')?.querySelector('label')?.textContent?.replace(' *','').trim() || el.name || el.type;
+      vals[label] = el.value || '（未入力）';
+    });
+    const lines = Object.entries(vals).map(([k,v]) => `▸ ${k}：${v}`).join('\n');
+    const headers = { 'karte': '📋 カルテ登録', 'reserve': '📅 予約リクエスト', 'cancel': '❌ キャンセル申請' };
+    return `【${headers[type] || type}】\n${lines}\n\n※ 鈴鹿 出張整体のフォームから送信されました。`;
+  }
+
+  async function handleSubmit(e, successId) {
+    e.preventDefault();
+    const form = e.target;
+    const success = document.getElementById(successId);
+    const typeMap = { 'karte-success': 'karte', 'reserve-success': 'reserve', 'cancel-success': 'cancel' };
+    const type = typeMap[successId] || 'other';
+    const message = buildMessage(form, type);
+    if (liff.isInClient && liff.isInClient()) {
+      try {
+        await liff.sendMessages([{ type: 'text', text: message }]);
+        form.style.display = 'none'; success.style.display = 'block';
+      } catch (err) { openLineUrl(message); form.style.display = 'none'; success.style.display = 'block'; }
+    } else {
+      openLineUrl(message); form.style.display = 'none'; success.style.display = 'block';
+    }
+  }
+
+  function openLineUrl(message) {
+    const encoded = encodeURIComponent(message);
+    window.open(`https://liff.line.me/${LIFF_ID}?msg=${encoded}`, '_blank');
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-fade]').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
