@@ -476,6 +476,63 @@
       color: #c62828; font-size: 14px; margin-top: 12px;
     }
 
+    /* ===== LINE SECTION ===== */
+    .line-section {
+      padding: 72px 20px;
+      background: linear-gradient(180deg, #e8f5e9 0%, #d8f3dc 100%);
+    }
+
+    .line-card {
+      max-width: 700px; margin: 0 auto;
+      display: flex; gap: 32px; align-items: center;
+      background: var(--white); border-radius: var(--radius);
+      padding: 32px; box-shadow: var(--shadow-lg);
+    }
+
+    .line-qr {
+      width: 200px; min-width: 200px;
+      padding: 12px;
+      background: var(--white);
+      border: 2px solid #06C755;
+      border-radius: var(--radius-sm);
+    }
+
+    .line-qr img {
+      width: 100%; height: auto; display: block;
+    }
+
+    .line-info h3 {
+      font-family: "Noto Serif JP", serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--text); margin-bottom: 8px;
+    }
+
+    .line-id {
+      font-size: 15px; color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .line-id strong {
+      color: #06C755; font-weight: 700;
+      font-family: -apple-system, monospace;
+      letter-spacing: 0.05em;
+    }
+
+    .line-desc {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.8; margin-bottom: 20px;
+    }
+
+    .btn-line {
+      background: #06C755; color: var(--white);
+      border: none; font-size: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .line-card { flex-direction: column; text-align: center; padding: 24px; }
+      .line-qr { width: 180px; min-width: 180px; margin: 0 auto; }
+    }
+
     /* ===== CTA BOTTOM ===== */
     .cta-bottom {
       padding: 80px 20px;
@@ -529,7 +586,7 @@
   <ul class="nav-links">
     <li><a href="#services">サービス</a></li>
     <li><a href="#karte">カルテ・予約</a></li>
-    <li><a href="https://liff.line.me/2000660080-3JenPg2e?liff_id=2000660080-3JenPg2e&is=lG88GKJ9p6&tcode=A5JxiCaSKlkdFhvKlYXm9AU5lXMuA8XmUaOxkfOfvdlEdNKXvUFeDY9ZNCmyqpha" target="_blank" rel="noopener">LINE予約</a></li>
+    <li><a href="#line-add">LINE登録</a></li>
   </ul>
 </nav>
 
@@ -839,19 +896,40 @@
   </div>
 </section>
 
+<!-- LINE FRIEND ADD SECTION -->
+<section class="line-section" id="line-add">
+  <div class="section-inner">
+    <span class="section-tag" data-fade style="color: #06C755;">LINE</span>
+    <h2 class="section-h" data-fade>LINEで友だち追加</h2>
+    <p class="section-p" data-fade>LINEでつながれば、予約・相談がもっとスムーズに。<br>朝4時から対応しております。</p>
+  </div>
+  <div class="line-card" data-fade>
+    <div class="line-qr">
+      <img src="https://qr-official.line.me/gs/M_057nvmlc_GW.png?oat_content=qr" alt="かず鈴鹿整体院 LINE QRコード" loading="lazy" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fline.me%2Fti%2Fp%2FJkJsTVDz2J';this.onerror=null;">
+    </div>
+    <div class="line-info">
+      <h3>かず鈴鹿整体院</h3>
+      <p class="line-id">LINE ID: <strong>s05250526</strong></p>
+      <p class="line-desc">QRコードを読み取るか、<br>下のボタンから友だち追加できます。</p>
+      <a class="btn btn-line" href="https://line.me/ti/p/JkJsTVDz2J" target="_blank" rel="noopener">&#x1F4AC; LINEで友だち追加</a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA BOTTOM -->
 <section class="cta-bottom" id="reserve">
   <h2 data-fade>夜勤明けの疲れ、<br>我慢しなくていい。</h2>
   <p data-fade>朝4時から、鈴鹿市内どこへでも。あなたの身体を整えに行きます。</p>
   <div class="hero-cta" data-fade>
     <a class="btn btn-primary" href="#karte">&#x1F4CB; カルテ・予約はこちら</a>
-    <a class="btn btn-secondary" href="https://liff.line.me/2000660080-3JenPg2e?liff_id=2000660080-3JenPg2e&is=lG88GKJ9p6&tcode=A5JxiCaSKlkdFhvKlYXm9AU5lXMuA8XmUaOxkfOfvdlEdNKXvUFeDY9ZNCmyqpha" target="_blank" rel="noopener">&#x1F4F1; LINE予約・相談</a>
+    <a class="btn btn-secondary" href="https://line.me/ti/p/JkJsTVDz2J" target="_blank" rel="noopener">&#x1F4F1; LINEで友だち追加</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <p>かず鈴鹿整体院 — 鈴鹿市 訪問整体 | 朝4時対応</p>
+  <p style="margin-top:8px;">📱 LINE ID: <a href="https://line.me/ti/p/JkJsTVDz2J" target="_blank" rel="noopener" style="color:#06C755; text-decoration:none; font-weight:700;">s05250526</a></p>
   <p style="margin-top:4px;">&copy; 2026 かず鈴鹿整体院. All rights reserved.</p>
 </footer>
 
